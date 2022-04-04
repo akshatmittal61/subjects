@@ -98,3 +98,18 @@ Picking the process from the ready queue and giving it to the CPU.
     -   Run -> Ready
     -   New -> Ready i.e.) when a process of high priority is just created.
     -   Wait -> Ready i.e.) when a process of high priority is just came out of waiting queue.
+
+# Scheduling ALgorithms
+
+## FCFS: first come first serve
+
+Process which arruved first will be executed first.
+Processes will be sorted in order of their arrival time.
+
+For e.g.)
+| P.No. | AT | BT | CT | TAT | WT |
+| ----- | -- | -- | -- | --- | -- |
+| 1 | 0 | 4 | 4 | 4 | 0 |
+| 2 | 1 | 4 | 4 | 4 | 0 |
+| 3 | 2 | 1 | 8 | 6 | 5 |
+| 4 | 3 | 2 | 10 | 7 | 5 |
