@@ -2,11 +2,11 @@
 void main()
 {
     int n;
-    int burstTimes[20], waitingTime[20], turnAroundTimes[20];
-    float completeWaitingTime, completeTurnAroundTime;
-
     printf("\n Enter the number of processes: ");
     scanf("%d", &n);
+
+    int burstTimes[n], waitingTime[n], turnAroundTimes[n];
+    float completeWaitingTime = 0, completeTurnAroundTime = 0;
 
     for (int i = 0; i < n; i++)
     {
@@ -14,8 +14,8 @@ void main()
         scanf("%d", &burstTimes[i]);
     }
 
-    waitingTime[0] = completeWaitingTime = 0;
-    turnAroundTimes[0] = completeTurnAroundTime = 0;
+    waitingTime[0] = 0;
+    turnAroundTimes[0] = 0;
 
     for (int i = 0; i < n; i++)
     {
