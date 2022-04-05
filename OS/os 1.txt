@@ -1,0 +1,273 @@
+#include <stdio.h>
+
+int main(void) {
+	// your code goes here
+	int n;
+	printf("Enter the number of processes: \t");
+	scanf("%d",&n);
+	int ptype[n],bt[n];
+	for(int i=0;i<n;i++){
+	    printf("Enter the process type '1' for system & '2'for user :\t");
+	    scanf("%d",&ptype[i]);
+	    printf("Enter the burst time of this process: \t");
+	    scanf("%d",&bt[i]);
+	    
+	}
+	int S_bt[2][n],U_bt[2][n],counter_s=0,counter_u=0;
+	for(int i=0;i<n;i++){
+	    if(ptype[i]==1){
+	        S_bt[0][counter_s]=bt[i];
+	        S_bt[1][counter_s]=i+1;
+	        counter_s++;
+	    }else{
+	        U_bt[0][counter_u]=bt[i];
+	        U_bt[1][counter_u]=i+1;
+	        counter_u++;
+	    }
+	    
+	}
+	for(int i=0;i<counter_s;i++){
+	    for(int j=i+1;j<counter_s;j++){
+	        if(S_bt[0][j] < S_bt[0][i]){
+	            int temp;
+	            temp=S_bt[0][i];
+	            S_bt[0][i]=S_bt[0][j];
+	            S_bt[0][j]=temp;
+	            
+	            temp=S_bt[1][i];
+	            S_bt[1][i]=S_bt[1][j];
+	            S_bt[1][j]=temp;
+	        }
+	    }
+	}
+	float cwt=0,ctat=0;
+	printf("P no.\tBT\t  WT\tTAT \n");
+	for(int i=0;i<counter_s;i++){
+	    ctat+=S_bt[0][i];
+	    printf("%d\t %d\t %f\t %f \n",S_bt[1][i],S_bt[0][i], cwt,ctat  );
+	    cwt+=S_bt[0][i];
+	}
+	for(int i=0;i<counter_u;i++){
+	    ctat+=U_bt[0][i];
+	     printf("%d\t %d\t %f\t %f \n",U_bt[1][i],U_bt[0][i], cwt,ctat  );
+	    cwt+=U_bt[0][i];
+	}
+	cwt-=U_bt[0][counter_u-1];
+	printf("The average Waiting Time is: %f\n",cwt/n);
+	printf("The average Turn around time is: %f",ctat/n);
+	return 0;
+}
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    printf("Enter the number of process u want:\t");
+    cin>>n;
+    
+    int AT[n],type[n],BT[n];
+    for(int i=0;i<n;i++){
+        printf("Enter the Arrival time of the process:\t");
+        cin>>AT[i];
+        printf("Enter the Burst time of the process: \t");
+        cin>>BT[i];
+        printf("Enter the type of the process: 0/1 system/user\t");
+        cin>>type[i];
+    }
+    
+    int o_tym=-1,tym=0,RQ[4][n],count=0,process_done=0;
+    float cwt=0,ctat=0;
+        printf("Process id\t Arrival Time\t Burst Time\t Waiting Time\t Turn around time\n");
+    while(1){
+        for(int i=0;i<n;i++){
+            if(AT[i]>o_tym && AT[i]<=tym){
+                RQ[0][count]=AT[i];
+                RQ[1][count]=type[i];
+                RQ[2][count]=i+1;
+                RQ[3][count]=BT[i];
+                count++;
+                // cout<<"count="<<i+1<<" ";
+            }
+        }
+        o_tym=tym;
+        int min=INT_MAX,index=-1;
+        for(int i=0;i<count;i++){
+            if(RQ[3][i]<min && RQ[1][i]==0 && RQ[3][i]>0){
+                min=RQ[3][i];
+                // RQ[3][i]=-1;
+                index=i;
+            }
+        }
+        
+        
+        if(index!=-1){
+            process_done++;
+            tym+=RQ[3][index];
+            ctat=tym -RQ[0][index];
+            cwt=ctat - RQ[3][index];
+            cout<<RQ[2][index]<<"\t\t  "<<RQ[0][index]<<"\t\t "<<min<<"\t\t  "<<cwt<<"\t\t  "<<ctat<<endl;
+            // o_tym=tym;
+            RQ[3][index]=-1;
+        }else if(process_done<count){
+            int min=INT_MAX,index=-1;
+            for(int i=0;i<count;i++){
+                // cout<<i<<endl;
+                // cout<<"The vlaue of RQ[0][3] is: "<<RQ[0][3]<<endl;
+                if(RQ[3][i]>0 && RQ[1][i]==1 && RQ[0][i]<min){
+                    min=RQ[0][i];
+                    index=i;
+                    // cout<<index<<endl;
+                }
+            }
+            process_done++;
+            tym+=RQ[3][index];
+            ctat=tym - RQ[0][index];
+            cwt=ctat-RQ[3][index];
+            cout<<RQ[2][index]<<"\t\t "<<RQ[0][index]<<"\t\t "<<RQ[3][index]<<"  \t\t"<<cwt<<"  \t\t"<<ctat<<endl;
+            // cwt+=RQ[3][index];
+            // o_tym=tym;
+            RQ[3][index]=-1;
+        }else{
+            tym++;
+            // cwt++;
+        }
+        if(process_done==n){
+            break;
+        }
+        
+            // cwt+=min;
+    }
+    
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    printf("Enter the number of process u want:\t");
+    cin>>n;
+    
+    int type[n],BT[n];
+    for(int i=0;i<n;i++){
+        printf("Enter the Burst time of the process: \t");
+        cin>>BT[i];
+        printf("Enter the type of the process: 0/1 system/user\t");
+        cin>>type[i];
+    }
+    
+    int RQ[3][n],count=0,process_done=0,s_count=0,u_count=0;
+    float cwt=0,ctat=0;
+    printf("Process id\t Burst Time\t Waiting Time\t Turn around time\n");
+        for(int i=0;i<n;i++){
+            if(BT[i]<=6 && type[i]==0){
+                RQ[0][count]=BT[i];  //Burst time
+                // RQ[0][count]=AT[i];
+                RQ[1][count]=type[i]; //Process type
+                RQ[2][count]=i+1;    //Pid
+                count++;
+                s_count++;
+                // cout<<"count="<<i+1<<" ";
+            }else if(BT[i]<=10 && type[i]==1){
+                RQ[0][count]=BT[i];
+                // RQ[0][count]=AT[i];
+                RQ[1][count]=type[i];
+                RQ[2][count]=i+1;
+                count++;
+                u_count++;
+            }
+        }
+        
+        
+        int p=0;
+    while(1){
+        
+        // o_tym=tym
+        int min=INT_MAX,index=-1;
+        if(p==0){
+            if(p==0 && s_count>0){
+            for(int i=0;i<count;i++){
+            if(RQ[0][i]<min && RQ[1][i]==0 && RQ[0][i]>0){
+                min=RQ[0][i];
+                // RQ[3][i]=-1;
+                index=i;
+            }
+            
+            }
+           if(index!=-1){
+            ctat+=min;
+            process_done++;
+            cout<<RQ[2][index]<<"\t\t  "<<min<<"\t\t  "<<cwt<<"\t\t  "<<ctat<<endl;
+            cwt+=RQ[0][index];
+            // o_tym=tym;
+            // tym+=RQ[0][index];
+            RQ[0][index]=-1;
+            p=1;
+        }
+        s_count--;
+            }else{
+                p=1;
+            }
+        }else if(p==1 && u_count>0){
+            {
+                u_count--;
+            p=0;
+            for(int i=0;i<count;i++){
+                // cout<<i<<endl;
+                // cout<<"The vlaue of RQ[0][3] is: "<<RQ[0][3]<<endl;
+                if(RQ[0][i]>0 && RQ[1][i]==1){
+                    min=RQ[0][i];
+                    index=i;
+                    break;
+                    // cout<<index<<endl;
+                }
+            }
+            ctat+=RQ[0][index];
+            process_done++;
+            cout<<RQ[2][index]<<"\t\t "<<RQ[0][index]<<"  \t\t"<<cwt<<"  \t\t"<<ctat<<endl;
+            cwt+=RQ[0][index];
+            // o_tym=tym;
+            // tym+=RQ[0][index];
+            RQ[0][index]=-1;
+            }
+            
+        }else{
+            if(p==0)
+            p=1;
+            else
+            p=0;
+        }
+        
+        if(process_done==count){
+            break;
+        }
+        
+            // cwt+=min;
+    }
+
+    
+
+    return 0;
+}
