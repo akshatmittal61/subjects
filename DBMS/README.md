@@ -36,3 +36,15 @@ The first is the extension of a schema while the last one is intension of it.
 -   **Multi Values Attributes**: age
 -   **Stored Attributes**: DOB
 -   **Derived Attributes**: age
+
+# Key
+
+A key is used to uniquely identify any tuple in a table.
+
+-   **Candidate Key**: The minimal set of attributes that can uniquely identify a tuple is known as a candidate key.
+-   **Super Key**: The set of attributes that can uniquely identify a tuple is known as Super Key.
+-   **Primary Key**: There can be more than one candidate key in relation out of which one can be chosen as the primary key.
+-   **Alternate Key**: The candidate key other than the primary key is called an alternate key.
+-   **Foreign key**: If an attribute can only take the values which are present as values of some other attribute, it will be a foreign key to the attribute to which it refers.
+
+![Types of Keys](images/types_of_keys.png)
