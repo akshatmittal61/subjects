@@ -48,3 +48,38 @@ A key is used to uniquely identify any tuple in a table.
 -   **Foreign key**: If an attribute can only take the values which are present as values of some other attribute, it will be a foreign key to the attribute to which it refers.
 
 ![Types of Keys](images/types_of_keys.png)
+
+# SQL
+
+SQL(Structured Query Language) is based in relational algebra. It was designed by IBM.
+
+### Create a table
+
+```sql
+CREATE TABLE employee (
+    emp_id int,
+    name varchar(10) NOT NULL,
+    bday DATE,
+    super int,
+    PRIMARY KEY (emp_id),
+    FOREIGN KEY (super) REFERENCES employee(super)
+);
+```
+
+## Referential Integrity
+
+**Referential Trigger Actions:**
+
+```sql
+ON DELETE CASCADE
+SET NULL
+SET DEFAULT
+```
+
+## Simple SQL Queries
+
+```sql
+SELECT name
+FROM emp
+WHERE location="Delhi";
+```
