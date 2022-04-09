@@ -83,3 +83,30 @@ SELECT name
 FROM emp
 WHERE location="Delhi";
 ```
+
+# Normalisation
+
+Database normalization is the process of organizing the attributes of the database to reduce or eliminate data redundancy (having the same data but at different places)
+
+## Anomalies
+
+-   Insertion
+-   Deletion
+-   Updation
+
+## Functional Dependency
+
+Functional Dependency is a constraint between two sets of attributes in relation to a database.
+
+**A→B**: A determines B. B is functionally dependent on A. Given the value of A, we can determine value of B.
+
+### Types of Functional Dependencies
+
+-   **Trivial**: A→B, AB→A. Deriving nothing new. i.e.) where X is subset of Y.
+-   **Non Trivial**: A→B, A→BC. Deriving new. i.e.) where X ∩ Y = ∅.
+-   **Semi Trivial**: AB→BC. Deriving something new. i.e.) where X ∩ Y ≠ ∅.
+
+## Closure Set
+
+The set of all the attributes one can determine by a given a set of attributes and functional dependency(ies) is called the closure set of that attribute.
+**Note**: If the closure set of an attrbute contains all the attributes of the relation, it is called the candidate key of the relation.
