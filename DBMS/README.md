@@ -109,4 +109,9 @@ Functional Dependency is a constraint between two sets of attributes in relation
 ## Closure Set
 
 The set of all the attributes one can determine by a given a set of attributes and functional dependency(ies) is called the closure set of that attribute.
-**Note**: If the closure set of an attrbute contains all the attributes of the relation, it is called the candidate key of the relation.
+
+If the closure set of an attrbute contains all the attributes of the relation, it is called the candidate key of the relation.
+
+**Note**: THe superset of a candidate key becomes a super key and hence cannot be counted as a candidate key.
+
+**No. of Candidate Keys**: Given n attributes in a relation, the no.of candidate keys = `2^n - 1`
