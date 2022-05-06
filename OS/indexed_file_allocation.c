@@ -21,7 +21,7 @@ int main()
         for (j = 0; j < ft[i].nob; j++)
             scanf("%d", &ft[i].blocks[j]);
     }
-    printf("\n Enter the file name to be searched-- ");
+    printf("\n Enter the file name to be searched: ");
     scanf("%s", s);
     for (i = 0; i < n; i++)
         if (strcmp(s, ft[i].name) == 0)
