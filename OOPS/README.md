@@ -37,3 +37,7 @@ class student{
     string name;
 };
 ```
+## Shallow Copy
+Default constructor does shallow copy, only pointers are copied not the memory
+## Deep Copy
+Default constructor does shallow copy, only pointers are copied not the memory

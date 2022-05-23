@@ -113,3 +113,42 @@ For e.g.)
 | 2 | 1 | 4 | 4 | 4 | 0 |
 | 3 | 2 | 1 | 8 | 6 | 5 |
 | 4 | 3 | 2 | 10 | 7 | 5 |
+
+# Disk Architecture
+
+Disk id divided into multiple parts: Platters -> Surface -> Track -> Sectors -> Data
+
+![Disk Architechture](./images/DiskMechanism.jpg)
+
+## Disk Access Time
+
+-   **Seek Time**: Time taken by the R/W head to reach desired track.
+-   **Rotation Time**: Time taken for one full rotation.
+-   **Rotation Latency**: Time taken to reach desired sector. (average = 0.5 \* rotation_time)
+-   **Transfer Time**: Data to be transfered / Transfer Rate
+
+    Transfer Rate = no. of heads _ capacity of one track _ no. of rotations in 1 sec
+
+-   **Disk Access Time**: Seek Time + Rotation Time + Transfer Time + Controller Time + Queue Time
+
+## Disk Scheduling Algorithms
+
+-   **FCFS (First Come First Serve)**
+    -   No starvation
+-   **SSTF (Shortest Seek Time First)**
+    -   Possibility of starvation
+-   **SCAN (Elevation Algorithm)**
+    -   Complete all the requests in one direction
+-   **LOOK**
+    -   The only difference in LOOK and SCAN is that it does not goes to the extreme limit while SCAN does.
+-   **C-SCAN (Circular SCAN)**
+    -   It goes to the extreme end and after that revert to the other end without fulfilling any other requests in between.
+-   **C-LOOK (Circular LOOK)**
+    -   Same as LOOK, only revert to the other end without fulfilling any requests in between.
+
+# File management
+
+File system is a software and manages how the data is stored and managed.
+
+We manage the data in forms of files of various types like pdf, doc, pptx, jpg, mp4, mp3, dat, txt etc.
+To store the data we use storage devices like hard disks, solid state drives, portable drives etc.
